@@ -4,26 +4,6 @@ import java.util.regex.Matcher;
 import java.util.ArrayList;
 
 public class Bob {
-    // Inner class to represent a task with status
-    static class Task {
-        String description;
-        boolean isDone;
-
-        Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-
-        String getStatusIcon() {
-            return isDone ? "[X]" : "[ ]";
-        }
-
-        @Override //
-        public String toString() {
-            return getStatusIcon() + " " + description;
-        }
-    }
-
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>(); //Initialise dynamic array
@@ -60,6 +40,58 @@ public class Bob {
                         for (int i = 0; i < tasks.size(); i++) {
                             System.out.println("    " + (i + 1) + "." + tasks.get(i));
                         }
+                    }
+                    System.out.println("    ___________________________");
+                    continue;
+                }
+
+
+                if (line.toLowerCase().startsWith("todo ")) {
+                    String description = line.substring(5).trim();
+                    if (description.isEmpty()) {
+                        System.out.println("    Error: Todo decription cannot be empty.");
+                    } else {
+                        tasks.add(new Todo(description)); //Add the new task into the task array
+                        System.out.println("    Got it. I've added this task:");
+                        System.out.println("    " + tasks.get(tasks.size() - 1));
+                        System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
+                    }
+                    System.out.println("    ___________________________");
+                    continue;
+                }
+
+                //handle deadline commands
+                if (line.toLowerCase().startsWith("deadline ")) {
+                    String rest = line.substring(9).trim(); //9 because 'deadline ' is 9 char long
+                    String[] parts = rest.split(" /by ");
+                    if (parts.length < 2) {
+                        System.out.println("    Error: Deadline must have description and /by time.");
+                    } else {
+                        String description = parts[0].trim();
+                        String by = parts[1].trim();
+                        tasks.add(new Deadline(description, by)); //Add the new deadline task into the task array
+                        System.out.println("    Got it. I've added this task:");
+                        System.out.println("    " + tasks.get(tasks.size() - 1));
+                        System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
+                    }
+                    System.out.println("    ___________________________");
+                    continue;
+                }
+
+                //handle event commands
+                if (line.toLowerCase().startsWith("event ")) {
+                    String rest = line.substring(6).trim(); //6 because 'event ' is 6 char long
+                    String[] parts = rest.split(" /from | /to");
+                    if (parts.length < 3) {
+                        System.out.println("    Error: Event ,ust have description, /from and /to times.");
+                    } else {
+                        String description = parts[0].trim();
+                        String start = parts[1].trim();
+                        String end = parts[2].trim();
+                        tasks.add(new Event(description, start, end)); //Add the new event task into the task array
+                        System.out.println("    Got it. I've added this task:");
+                        System.out.println("    " + tasks.get(tasks.size() - 1));
+                        System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
                     }
                     System.out.println("    ___________________________");
                     continue;
