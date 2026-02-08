@@ -5,6 +5,7 @@ Hello from
 |  __  ( | |   | | |  __  ( 
 | |__)  )| |___| | | |__)  )
 |______/ |_______| |______/ 
+
     ___________________________
     Hello! I'm BOB
     What can I do for you?
@@ -21,20 +22,19 @@ Hello from
     Error: Todo description cannot be empty.
     ___________________________
     ___________________________
-    Error: Todo description cannot be empty.
-    ___________________________
-    ___________________________
     Got it. I've added this task:
-    [T][ ] exercise daily
+    [T][ ] (with spaces)
     Now you have 2 tasks in the list.
     ___________________________
     ___________________________
     Got it. I've added this task:
-    [D][ ] submit report (by: 2024-09-30)
+    [T][ ] exercise daily
     Now you have 3 tasks in the list.
     ___________________________
     ___________________________
-    Error: Deadline must have description and /by time.
+    Got it. I've added this task:
+    [D][ ] submit report (by: 2024-09-30)
+    Now you have 4 tasks in the list.
     ___________________________
     ___________________________
     Error: Deadline must have description and /by time.
@@ -44,16 +44,19 @@ Hello from
     ___________________________
     ___________________________
     Error: Deadline must have description and /by time.
+    ___________________________
+    ___________________________
+    added: deadline
     ___________________________
     ___________________________
     Got it. I've added this task:
     [D][ ] return library books (by: tomorrow 5pm)
-    Now you have 4 tasks in the list.
+    Now you have 6 tasks in the list.
     ___________________________
     ___________________________
     Got it. I've added this task:
     [E][ ] team meeting (from: 2pm to: 4pm)
-    Now you have 5 tasks in the list.
+    Now you have 7 tasks in the list.
     ___________________________
     ___________________________
     Error: Event must have description, /from and /to times.
@@ -65,19 +68,20 @@ Hello from
     Error: Event must have description, /from and /to times.
     ___________________________
     ___________________________
-    Error: Event must have description, /from and /to times.
+    added: event
+    ___________________________
     ___________________________
     Got it. I've added this task:
     [E][ ] conference (from: 9am to: 6pm)
-    Now you have 6 tasks in the list.
+    Now you have 9 tasks in the list.
     ___________________________
     ___________________________
     Nice! I've marked this task as done: 
-    1.[X] read book
+    1.[T][X] read book
     ___________________________
     ___________________________
     Nice! I've marked this task as done: 
-    2.[X] exercise daily
+    2.[T][X] (with spaces)
     ___________________________
     ___________________________
     Error: Task number 0 does not exist.
@@ -92,33 +96,34 @@ Hello from
     Error: Please specify a valid task number.
     ___________________________
     ___________________________
-    Error: Please specify a task number.
+    added: mark
+    ___________________________
+    ___________________________
+    Nice! I've marked this task as done: 
+    1.[T][X] read book
+    ___________________________
+    ___________________________
+    Ok, I've marked this task as not done yet: 
+    1.[T][ ] read book
+    ___________________________
+    ___________________________
+    Ok, I've marked this task as not done yet: 
+    2.[T][ ] (with spaces)
+    ___________________________
+    ___________________________
+    Error: Task number 0 does not exist.
+    ___________________________
+    ___________________________
+    Error: Task number -5 does not exist.
+    ___________________________
+    ___________________________
+    Error: Task number 999 does not exist.
     ___________________________
     ___________________________
     Error: Please specify a valid task number.
     ___________________________
     ___________________________
-    Ok, I've marked this task as not done yet: 
-    1.[ ] read book
-    ___________________________
-    ___________________________
-    Ok, I've marked this task as not done yet: 
-    2.[ ] exercise daily
-    ___________________________
-    ___________________________
-    Error: Task number 0does not exist.
-    ___________________________
-    ___________________________
-    Error: Task number -5does not exist.
-    ___________________________
-    ___________________________
-    Error: Task number 999does not exist.
-    ___________________________
-    ___________________________
-    Error: Please specify a valid task number.
-    ___________________________
-    ___________________________
-    Error: Please specify a task number.
+    added: unmark
     ___________________________
     ___________________________
     Nonono, you are ;)
@@ -313,46 +318,54 @@ Hello from
     added: TASK ONE
     ___________________________
     ___________________________
-    added: TODO TWO
+    Got it. I've added this task:
+    [T][ ] TWO
+    Now you have 71 tasks in the list.
     ___________________________
     ___________________________
-    added: DEADLINE THREE
+    Error: Deadline must have description and /by time.
     ___________________________
     ___________________________
-    added: EVENT FOUR
+    Error: Event must have description, /from and /to times.
     ___________________________
     ___________________________
-    added: mark todo
+    Error: Please specify a valid task number.
     ___________________________
     ___________________________
-    added: unmark event
+    Error: Please specify a valid task number.
     ___________________________
     ___________________________
-    added: deadline event /from /to /by
+    Error: Deadline must have description and /by time.
     ___________________________
     ___________________________
-    added: event deadline /by 2024
+    Error: Event must have description, /from and /to times.
     ___________________________
     ___________________________
-    added: todo /by tomorrow
+    Got it. I've added this task:
+    [T][ ] /by tomorrow
+    Now you have 72 tasks in the list.
     ___________________________
     ___________________________
-    added: todo /from 2pm
+    Got it. I've added this task:
+    [T][ ] /from 2pm
+    Now you have 73 tasks in the list.
     ___________________________
     ___________________________
-    added: todo /to 4pm
+    Got it. I've added this task:
+    [T][ ] /to 4pm
+    Now you have 74 tasks in the list.
     ___________________________
     ___________________________
-    added: deadline task /from 2pm /to 4pm
+    Error: Deadline must have description and /by time.
     ___________________________
     ___________________________
-    added: event task /by tomorrow
+    Error: Event must have description, /from and /to times.
     ___________________________
     ___________________________
-    added: mark first
+    Error: Please specify a valid task number.
     ___________________________
     ___________________________
-    added: unmark last
+    Error: Please specify a valid task number.
     ___________________________
     ___________________________
     added: list all tasks
@@ -521,6 +534,4 @@ Hello from
     ___________________________
     ___________________________
     added: machine learning
-    ___________________________
-    Bye. Hope to see you again soon!
     ___________________________
