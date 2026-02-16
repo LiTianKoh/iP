@@ -4,29 +4,42 @@ import java.util.regex.Matcher;
 import java.util.ArrayList;
 
 public class Bob {
+
+    // Constants for command prefixes
+    private static final String TODO_COMMAND = "todo ";
+    private static final String DEADLINE_COMMAND = "deadline ";
+    private static final String EVENT_COMMAND = "event ";
+    private static final String MARK_COMMAND = "mark ";
+    private static final String UNMARK_COMMAND = "unmark ";
+
+    // Constants for command lengths
+    private static final int TODO_LENGTH = TODO_COMMAND.length();       // 5
+    private static final int DEADLINE_LENGTH = DEADLINE_COMMAND.length(); // 9
+    private static final int EVENT_LENGTH = EVENT_COMMAND.length();     // 6
+
+    // Constants for date/time delimiters
+    private static final String DEADLINE_DELIMITER = " /by ";
+    private static final String EVENT_FROM_DELIMITER = " /from ";
+    private static final String EVENT_TO_DELIMITER = " /to ";
+
+    // Constants for UI
+    private static final String SEPARATOR = "    ___________________________";
+    private static final String INDENT = "    ";
+
+    // Pattern for compliments (make it class-level)
+    private static final Pattern COMPLIMENT_PATTERN =
+            Pattern.compile("handsome|beautiful", Pattern.CASE_INSENSITIVE);
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
         String line;
 
-        String logo =
-                " ______   _______   ______ \n"
-                        + "|  __  \\ |  ___  | |  __  \\ \n"
-                        + "| |__)  )| |   | | | |__)  )\n"
-                        + "|  __  ( | |   | | |  __  ( \n"
-                        + "| |__)  )| |___| | | |__)  )\n"
-                        + "|______/ |_______| |______/ \n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("    ___________________________");
-        System.out.println("    Hello! I'm BOB");
-        System.out.println("    What can I do for you?");
-        System.out.println("    ___________________________");
-
-        Pattern pattern = Pattern.compile("handsome|beautiful", Pattern.CASE_INSENSITIVE);
+        Logo.printBob();     // To print the logo and the greeting
 
         do {
             line = in.nextLine();
-            System.out.println("    ___________________________");
+            System.out.println(SEPARATOR);
 
             if (!line.equalsIgnoreCase("Bye")) {
                 try {
@@ -59,50 +72,50 @@ public class Bob {
 
                 } catch (IllegalArgumentException e) {
                     BobExceptions.handleException(e);
-                    System.out.println("    ___________________________");
+                    System.out.println(SEPARATOR);
                 }
             }
         } while (!line.toLowerCase().contains("bye"));
 
-        System.out.println("    Bye. Hope to see you again soon!");
-        System.out.println("    ___________________________");
+        System.out.println(INDENT + "Bye. Hope to see you again soon!");
+        System.out.println(SEPARATOR);
         in.close();
     }
 
     private static void handleList(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
-            System.out.println("    No tasks in your list.");
+            System.out.println(INDENT + "No tasks in your list.");
         } else {
-            System.out.println("    Here are the tasks in your list:");
+            System.out.println(INDENT + "Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println("    " + (i + 1) + "." + tasks.get(i));
+                System.out.println(INDENT + (i + 1) + "." + tasks.get(i));
             }
         }
-        System.out.println("    ___________________________");
+        System.out.println(SEPARATOR);
     }
 
     private static void handleTodo(ArrayList<Task> tasks, String description) {
         tasks.add(new Todo(description));
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("    " + tasks.get(tasks.size() - 1));
-        System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
-        System.out.println("    ___________________________");
+        System.out.println(INDENT + "Got it. I've added this task:");
+        System.out.println(INDENT + tasks.get(tasks.size() - 1));
+        System.out.println(INDENT + "Now you have " + tasks.size() + " tasks in the list.");
+        System.out.println(SEPARATOR);
     }
 
     private static void handleDeadline(ArrayList<Task> tasks, String description, String by) {
         tasks.add(new Deadline(description, by));
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("    " + tasks.get(tasks.size() - 1));
-        System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
-        System.out.println("    ___________________________");
+        System.out.println(INDENT + "Got it. I've added this task:");
+        System.out.println(INDENT + tasks.get(tasks.size() - 1));
+        System.out.println(INDENT + "Now you have " + tasks.size() + " tasks in the list.");
+        System.out.println(SEPARATOR);
     }
 
     private static void handleEvent(ArrayList<Task> tasks, String description, String start, String end) {
         tasks.add(new Event(description, start, end));
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("    " + tasks.get(tasks.size() - 1));
-        System.out.println("    Now you have " + tasks.size() + " tasks in the list.");
-        System.out.println("    ___________________________");
+        System.out.println(INDENT + "Got it. I've added this task:");
+        System.out.println(INDENT + tasks.get(tasks.size() - 1));
+        System.out.println(INDENT + "Now you have " + tasks.size() + " tasks in the list.");
+        System.out.println(SEPARATOR);
     }
 
     private static void handleMark(ArrayList<Task> tasks, int taskNum, boolean markAsDone) {
@@ -111,22 +124,22 @@ public class Bob {
         task.isDone = markAsDone;
 
         if (markAsDone) {
-            System.out.println("    Nice! I've marked this task as done: ");
+            System.out.println(INDENT + "Nice! I've marked this task as done: ");
         } else {
-            System.out.println("    Ok, I've marked this task as not done yet: ");
+            System.out.println(INDENT + "Ok, I've marked this task as not done yet: ");
         }
-        System.out.println("    " + taskNum + "." + task.toString());
-        System.out.println("    ___________________________");
+        System.out.println(INDENT + taskNum + "." + task.toString());
+        System.out.println(SEPARATOR);
     }
 
     private static void handleGenericTask(ArrayList<Task> tasks, String line) {
-        Pattern pattern = Pattern.compile("handsome|beautiful", Pattern.CASE_INSENSITIVE);
-        if (pattern.matcher(line).find()) {
-            System.out.println("    Nonono, you are ;)");
+        // Use the class-level pattern instead of creating a new one
+        if (COMPLIMENT_PATTERN.matcher(line).find()) {
+            System.out.println(INDENT + "Nonono, you are ;)");
         } else {
             tasks.add(new Task(line));
-            System.out.println("    added: " + line);
+            System.out.println(INDENT + "added: " + line);
         }
-        System.out.println("    ___________________________");
+        System.out.println(SEPARATOR);
     }
 }
