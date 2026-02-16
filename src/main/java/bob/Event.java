@@ -1,8 +1,8 @@
 package bob;
 
 public class Event extends Task {
-    protected String start;
-    protected String end;
+    private String start;
+    private String end;
 
     public Event(String description, String start, String end) {
         super(description);
