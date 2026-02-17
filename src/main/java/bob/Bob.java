@@ -27,6 +27,9 @@ public class Bob {
     private static final String SEPARATOR = "    ___________________________";
     private static final String INDENT = "    ";
 
+    //Constant for delete
+    private static final String DELETE_COMMAND = "delete";
+
     // Pattern for compliments (make it class-level)
     private static final Pattern COMPLIMENT_PATTERN =
             Pattern.compile("handsome|beautiful", Pattern.CASE_INSENSITIVE);
@@ -69,8 +72,10 @@ public class Bob {
                     case "task":
                         handleGenericTask(tasks, userInput);
                         break;
+                    case "delete":
+                        Delete.handleDelete(tasks, Integer.parseInt(parsed[1]));    //Parsed the second part of the input and convert it to integer
+                        break;
                     }
-
                 } catch (IllegalArgumentException e) {
                     BobExceptions.handleException(e);
                     System.out.println(SEPARATOR);

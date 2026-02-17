@@ -29,21 +29,41 @@ public class BobExceptions {
 
         // Check command type and delegate to appropriate parser
         if (trimmedLine.equals("todo") || trimmedLine.startsWith("todo ")) {
-            return parseTodo(line);
+            return parseTodo(userInput);
         } else if (trimmedLine.equals("deadline") || trimmedLine.startsWith("deadline ")) {
-            return parseDeadline(line);
+            return parseDeadline(userInput);
         } else if (trimmedLine.equals("event") || trimmedLine.startsWith("event ")) {
-            return parseEvent(line);
+            return parseEvent(userInput);
         } else if (trimmedLine.equals("mark") || trimmedLine.startsWith("mark ")) {
-            return parseMarkUnmark(line, "mark");
+            return parseMarkUnmark(userInput, "mark");
         } else if (trimmedLine.equals("unmark") || trimmedLine.startsWith("unmark ")) {
-            return parseMarkUnmark(line, "unmark");
+            return parseMarkUnmark(userInput, "unmark");
         } else if (trimmedLine.equals("list")) {
             return new String[]{"list"};
+        } else if (trimmedLine.equals("delete") || trimmedLine.startWith("delete ")) {
+            return parseDelete(userInput);
         }
 
         // Generic task
         return new String[]{"task", userInput};
+    }
+
+    private static String[] parseDelete(String userInput) {
+        if (userInput.equalsIgnoreCase("delete")) {
+            throw new IllegalArgumentException(MISSING_TASK_NUMBER);
+        }
+
+        String rest = userInput.substring(7).trim();
+
+        if (rest.isEmpty()) {
+            throw new IllegalArgumentException(MISSING_TASK_NUMBER);
+        }
+        try {
+            int taskNum = Integer.parseInt(rest.trim());
+            return new String[] {"delete", String.valueOf(taskNum)};
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INVALID_TASK_NUMBER);
+        }
     }
 
     private static String[] parseTodo(String userInput) {
@@ -79,7 +99,7 @@ public class BobExceptions {
             throw new IllegalArgumentException(EVENT_INVALID_FORMAT);
         }
 
-        String rest = line.substring(6).trim();
+        String rest = userInput.substring(6).trim();
         String[] parts = rest.split(" /from | /to ");
 
         if (parts.length < 3 || parts[0].trim().isEmpty() ||
