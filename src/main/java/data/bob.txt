@@ -1,6 +1,4 @@
 ===================
 Taskings
 ===================
-E | [ ] | house visit | 1500 to 1900
-D | [✓] | finsih hw | 2000
-T | [ ] | run to the gym
+E | [ ] | Li Tian dinner date with family Friday 20 Feb 2026 | 7 to 9 pm
